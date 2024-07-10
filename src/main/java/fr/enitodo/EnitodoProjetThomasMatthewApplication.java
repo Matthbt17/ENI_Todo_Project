@@ -8,6 +8,7 @@ public class EnitodoProjetThomasMatthewApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EnitodoProjetThomasMatthewApplication.class, args);
+		System.out.println("bonjour");
 	}
 
 }
