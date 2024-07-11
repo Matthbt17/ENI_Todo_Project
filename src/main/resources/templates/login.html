@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{}, titre=~{:: title}, main=~{:: main})}">
+<title>ENI PROJET</title>
+<head>
+
+</head>
+<body>
+	<main>
+		<form data-th-action="@{/login}" method="post">
+		<label for="email">Email</label>
+		<input type="text" name="username" id="email">
+		<label for="password">Mot de passe</label>
+		<input type="password" name="password" id="password">
+		<button type="submit">Se connecter</button>
+		</form>
+	</main>
+</body>
+</html>

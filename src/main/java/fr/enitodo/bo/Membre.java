@@ -14,11 +14,19 @@ public class Membre implements Serializable {
 	private String password;
 
 	public Membre(long id, String email, String password) {
-		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 	}
+	
+	public Membre() {
+	}
+	
+	public Membre(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+	
 
 	public long getId() {
 		return id;
@@ -47,7 +55,6 @@ public class Membre implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString());
 		builder.append(" - Membre (email=");
 		builder.append(email);
 		builder.append(") ");

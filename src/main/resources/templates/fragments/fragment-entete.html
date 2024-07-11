@@ -1,8 +1,12 @@
 <header xmlns:th="http://www.thymeleaf.org" id="nav" class="navbar" data-th-fragment="frag-entete">
         <img src="" id="logoTodo">
-        <a href="" class="liens">Accueil</a>
-        <a href="" class="liens">Gérer son projet</a>
-        <a href="" class="liens">About us</a>
-        <a href="" class="liens">Inscription</a>
-        <a href="" class="liens">Connection</a>	
+        <a href="/" class="liens">Accueil</a>
+        <a href="/projet" class="liens">Gérer son projet</a>
+        <a href="/aboutus" class="liens">About us</a>
+        <a href="/signin" class="liens">Inscription</a>
+        <a href="/login" class="liens">Connexion</a>
+        <div data-th-if="${#authorization.expression('isAuthenticated()')}">
+			<span data-th-text="${#authentication.name}"></span>
+			<h2> HE OH TES CCONNNECCETE HAHAHAHA</h2>
+		</div>	
 </header>
