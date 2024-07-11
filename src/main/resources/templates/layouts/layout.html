@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	data-th-fragment="main-layout(head, titre, main)">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" data-th-href="@{/css/styles.css}">
+<title data-th-replace="${titre}"></title>
+<th:block data-th-replace="${head}"></th:block>
+</head>
+<body>
+	<header data-th-replace="~{fragments/fragment-entete :: frag-entete}"></header>
+	<main data-th-replace="${main}"></main>
+	<footer data-th-replace="~{fragments/fragment-footer :: frag-footer}"></footer>
+</body>
+</html>
+
+
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	data-th-fragment="main-layout-nofooter(head, titre, main)">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" data-th-href="@{/css/styles.css}">
+<title data-th-replace="${titre}"></title>
+<th:block data-th-replace="${head}"></th:block>
+</head>
+<body>
+	<header data-th-replace="~{fragments/fragment-entete :: frag-entete}"></header>
+	<main data-th-replace="${main}"></main>
+</body>
+</html>
