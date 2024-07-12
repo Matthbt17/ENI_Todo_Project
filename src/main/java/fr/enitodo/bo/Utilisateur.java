@@ -18,6 +18,9 @@ public class Utilisateur implements Serializable {
 		this.password = password;
 	}
 	
+	public Utilisateur() {
+		
+	}
 	
 
 	public String getPassword() {

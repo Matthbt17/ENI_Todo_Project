@@ -8,12 +8,14 @@
 </head>
 <body>
 	<main>
-		<form data-th-action="@{/signin}" method="post" id="forminscription">
-		<label for="pseudo">Pseudo</label>
-		<input type="text" name="username" id="username">
-		<label for="password">Mot de passe</label>
-		<input type="password" name="password" id="password">
-		<button type="submit">S'enregistrer</button>
+		<form data-th-action="@{/signin}" method="post" id="forminscription"
+			data-th-object="${user}">
+			<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+			<label for="inputPseudo">Pseudo</label> <input type="text" name="inputPseudo"
+				id="inputPseudo" required data-th-field="*{pseudo}">
+			<label for="inputPassword">Mot de passe</label> <input type="password"
+				name="inputPassword" id="inputPassword" required data-th-field="*{password}">
+			<button type="submit">S'enregistrer</button>
 		</form>
 	</main>
 </body>

@@ -1,0 +1,6 @@
+<div xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-errors"
+	th:if="${#fields.hasErrors('*')}">
+	<h2>Veuillez vérifier vos champs</h2>
+	<p data-th-each="err : ${#fields.errors('global')}"
+		data-th-text="#{${err}}"></p>
+</div>

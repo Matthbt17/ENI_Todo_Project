@@ -1,0 +1,6 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	data-th-fragment="frag-error(inputName)"
+	data-th-if="${#fields.hasErrors(inputName)}" id="regardeThomas">
+	<div data-th-each="err: ${#fields.errors(inputName)}"
+		data-th-text="${err}"></div>
+</div>
