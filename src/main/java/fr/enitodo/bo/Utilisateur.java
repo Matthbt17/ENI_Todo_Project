@@ -1,6 +1,8 @@
 package fr.enitodo.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilisateur implements Serializable {
 	
@@ -11,13 +13,23 @@ public class Utilisateur implements Serializable {
 	
 	private String pseudo;
 	private String password;
+	private List<Projet> listeProjets;
 
 	public Utilisateur(String pseudo, String password) {
 		super();
 		this.pseudo = pseudo;
 		this.password = password;
+		this.listeProjets = new ArrayList<>();
 	}
 	
+	public List<Projet> getListeProjets() {
+		return listeProjets;
+	}
+
+	public void setListeProjets(List<Projet> listeProjets) {
+		this.listeProjets = listeProjets;
+	}
+
 	public Utilisateur() {
 		
 	}

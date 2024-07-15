@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: main-layout(head=~{}, titre=~{:: title}, main=~{:: main})}">
+	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{}, titre=~{:: title}, main=~{:: main})}">
 <title>ENI PROJET</title>
 <head>
 
 </head>
 <body>
 	<main>
-		<h2>Bonjour !</h2>
+		<form data-th-action="@{/projet}" method="post" data-th-object="${projet}">
+		<label for="titre">Titre de votre projet</label>
+		<input type="text" name="titre" id="titreProjet" data-th-field="*{titre}">
+		<label for="codeProjet">Code de votre projet (Ne divulguez pas le code créé) :</label>
+		<input type="number" name="codeProjet" id="codeProjet" data-th-field="*{codeProjet}">
+		<button type="submit">Créer votre projet !</button>
+		</form>
 	</main>
 </body>
 </html>

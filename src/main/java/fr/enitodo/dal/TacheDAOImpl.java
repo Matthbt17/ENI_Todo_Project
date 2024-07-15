@@ -19,15 +19,15 @@ public class TacheDAOImpl implements TacheDAO {
 
 	@Override
 	public Tache read(String titre) {
-		String sql = "SELECT titre FROM TACHE WHERE titre =:titre";
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite FROM TACHE WHERE titre =:titre";
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("Titre", titre);
+		params.addValue("titre", titre);
 		return jdbc.queryForObject(sql, params, new BeanPropertyRowMapper<>(Tache.class));
 	}
 
 	@Override
 	public void createTache(Tache tache) {
-		String sql = "INSERT INTO TACHE(titre, statutDePriorite, dateDeFin) VALUES(:titre, :statutDePriorite, :dateDeFin)";
+		String sql = "INSERT INTO TACHE(titre, date_de_fin, statut_de_priorite) VALUES(:titre, :statutDePriorite, :dateDeFin)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("titre", tache.getTitre());
 		params.addValue("statutDePriorite", tache.getStatutDePriorite());
@@ -46,7 +46,7 @@ public class TacheDAOImpl implements TacheDAO {
 
 	@Override
 	public List<Tache> findAll() {
-		String sql = "SELECT titre FROM TACHE";
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite FROM TACHE";
 		return jdbc.query(sql, new BeanPropertyRowMapper<>(Tache.class));
 	}
 
