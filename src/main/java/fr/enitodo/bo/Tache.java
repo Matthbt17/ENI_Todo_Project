@@ -76,7 +76,7 @@ public class Tache implements Serializable {
 		builder.append(titre);
 		builder.append("Dead Line :");
 		builder.append(dateDeFin);
-		builder.append(", Priorités : ");
+		builder.append(", PrioritÃ©s : ");
 		builder.append(statutDePriorite);
 		return builder.toString();
 
