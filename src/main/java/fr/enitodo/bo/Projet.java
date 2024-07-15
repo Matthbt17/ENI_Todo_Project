@@ -117,14 +117,13 @@ public class Projet implements Serializable {
 		builder.append("Projet (");
 		builder.append(id);
 		builder.append(")\n\ttitre : ");
-		builder.append(titre);
+		builder.append(titre+"\n");
 		builder.append("[pseudo : ");
-		builder.append(pseudo);
+		builder.append(pseudo+"\n");
 		builder.append("[taches : ");
-		builder.append(tache);
+		builder.append(tache+"\n");
 		builder.append(", code projet : ");
-		builder.append(codeProjet);
-
+		builder.append(codeProjet+"\n"+"\n");
 		return builder.toString();
 
 	}

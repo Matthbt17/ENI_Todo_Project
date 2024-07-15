@@ -70,19 +70,16 @@ public class TacheController {
     	model.addAttribute("projet", new Projet());
     	System.out.println("User logged : "+userLogged);
     	lstProjets = projetService.readAllProjetMember(userLogged);
-    	for( Projet p : lstProjets) {
-    		System.out.println(p.getPseudo());
-    	}
+    	System.out.println(lstProjets);
     	return "view-projet";
     }
     
     @PostMapping
     String creaProjet(@CurrentSecurityContext(expression="authentication?.name")
-    String userLogged,
-    		@ModelAttribute("projet") Projet projet) {
+    				  String userLogged,
+    				  @ModelAttribute("projet") Projet projet) {
     	projet.setPseudo(userLogged);
     	System.out.println(projet);
-    	System.out.println("PSEUDO DU PROJET = "+projet.getPseudo());
     	projetService.creerProjet(projet);
     	System.out.println("PSEUDO DU PROJET = "+projet.getPseudo());
     	return "redirect:/";
