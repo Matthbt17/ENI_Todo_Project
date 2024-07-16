@@ -1,6 +1,12 @@
 package fr.enitodo.controller;
 
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +31,7 @@ import fr.enitodo.bo.Utilisateur;
 
 @Controller
 @RequestMapping("/projet")
-@SessionAttributes({ "projetsEnSession" })
+@SessionAttributes({ "projetsEnSession","registeredTasks" })
 public class TacheController {
 
     private TacheService tacheService;
@@ -40,6 +46,12 @@ public class TacheController {
     public List<Projet> chargerProjetUtilisateur(){
     		List<Projet> listeProjet = new ArrayList<>();
     	return listeProjet;
+    }
+    
+    @ModelAttribute("registeredTasks")
+    public List<Tache> chargerTacheParProjet(){
+    		List<Tache> listeTache = new ArrayList<>();
+    	return listeTache;
     }
     
 	@GetMapping("/taches")
@@ -80,8 +92,28 @@ public class TacheController {
     public String afficherDetailProjet(
     		@RequestParam(name = "id", required = true) int id,
     		@ModelAttribute("projet") Projet projet,
+    		@ModelAttribute("tache") Tache tache,
+    		@ModelAttribute("registeredTasks") List<Tache> listeTache,
 			Model model) {
     	projet = projetService.read(id);
+    	model.addAttribute("projet", projet);
+    	System.out.println(projet);
+    	listeTache = tacheService.getTacheParProjet(projet.getId());
+    	System.out.println(listeTache);
+    	model.addAttribute("registeredTasks", listeTache);
+    	model.addAttribute("tache", new Tache());
 		return "view-projet-detail";
+    }
+    
+    @PostMapping("/detail")
+    String creaTache(
+    		@RequestParam(name = "id", required = true) int id,
+    		@ModelAttribute("projet") Projet projet,
+    		@ModelAttribute("tache") Tache tache,
+    		Model model) {
+    	model.addAttribute("projet", projet);
+    	tache.setIdProjet(id);
+    	tacheService.createTache(tache);
+    	return "redirect:/projet";
     }
 }

@@ -15,15 +15,27 @@ public class Tache implements Serializable {
 	private LocalDate dateDeFin;
 	private int statutDePriorite;
 	private boolean isComplete;
+	private String description;
+	private int idProjet;
 
-	public Tache(long id, String titre, LocalDate dateDeFin, int statutDePriorite, boolean isComplete) {
+	public Tache(long id, String titre, LocalDate dateDeFin, int statutDePriorite, boolean isComplete, String description, int idProjet) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.dateDeFin = dateDeFin;
 		this.statutDePriorite = statutDePriorite;
 		this.isComplete = isComplete;
+		this.description = description;
+		this.idProjet = idProjet;
 	}
+	
+	
+
+	public Tache() {
+		
+	}
+
+
 
 	public long getId() {
 		return id;
@@ -72,14 +84,42 @@ public class Tache implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		builder.append("id : ");
+		builder.append(id+"\n");
 		builder.append("titre : ");
-		builder.append(titre);
+		builder.append(titre+"\n");
+		builder.append("id PROJET : ");
+		builder.append(idProjet+"\n");
 		builder.append("Dead Line :");
-		builder.append(dateDeFin);
-		builder.append(", PrioritÃ©s : ");
-		builder.append(statutDePriorite);
+		builder.append(dateDeFin+"\n");
+		builder.append(", Priorités : ");
+		builder.append(statutDePriorite+"\n");
 		return builder.toString();
 
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	public int getIdProjet() {
+		return idProjet;
+	}
+
+
+
+	public void setIdProjet(int idProjet) {
+		this.idProjet = idProjet;
 	}
 
 }

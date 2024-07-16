@@ -38,4 +38,9 @@ public class TacheServiceImpl implements TacheService {
 		tacheDAO.createTache(tache);
 	}
 
+	@Override
+	public List<Tache> getTacheParProjet(long id) {
+		return tacheDAO.findAllTaskProjet(id);
+	}
+
 }

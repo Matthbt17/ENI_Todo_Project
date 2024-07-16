@@ -6,12 +6,10 @@ import fr.enitodo.bo.Tache;
 
 
 public interface TacheDAO {
-	Tache read(String titre);
-	void createTache(Tache tache);
-	void delete(Tache tache);
-	List<Tache> findAll();
-	
-	
-	
+Tache read(String titre);
+void createTache(Tache tache);
+void delete(Tache tache);
+List<Tache> findAll();
+List<Tache> findAllTaskProjet(long id);
 
 }

@@ -11,8 +11,7 @@ public interface TacheService {
 	Tache findByTitre (String titreTache);
 
 	void createTache(Tache tache);
-
 	
-
+	List<Tache> getTacheParProjet(long id);
 
 }

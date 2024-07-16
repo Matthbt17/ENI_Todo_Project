@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: main-layout(head=~{}, titre=~{:: title}, main=~{:: main})}">
+	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{:: #monCSS}, titre=~{:: title}, main=~{:: main})}">
 <title>ENI PROJET</title>
-<head>
-
-</head>
+<th:block id="monCSS">
+	<link rel="stylesheet" data-th-href="@{/css/tache.css}">
+</th:block>
 <body>
-	<main>
-		<div id="container">
-			<div id="cardsContainer">
-				<div class="cardsconnect">
-					<h2>Connexion</h2>
+	<main id="mainFormBlock">
+		<div id="container-tache">
+			<div id="cardsContainertasks">
+				<div class="cardstasks">
+					<h2 data-th-text="'Détails du projet : '+${projet.titre}"></h2>
 					<hr>
-					<form data-th-action="@{/login}" method="post" class="login">
-
-						<label for="email"></label>
-						<div class="login__field">
-							<input type="text" name="username" id="email"
-								class="login__input" placeholder="Pseudo"> <br>
+					<div data-th-if="${#lists.isEmpty(registeredTasks)}"
+						data-th-text="'YA RIEN CA REND FOU'"></div>
+					<div data-th-if="${not #lists.isEmpty(registeredTasks)}"
+						data-th-each="tache : ${registeredTasks}">
+						<h1 data-th-text="${tache.titre}"></h1>
+						<h2 data-th-text="${tache.dateDeFin}"></h2>
+					</div>
+					
+					<div class="">
+						<div class="checkbox-wrapper-15">
+							<input class="inp-cbx" id="cbx-15" type="checkbox"
+								style="display: none;" /> <label class="cbx" for="cbx-15"
+								style="display: flex; justify-content: space-between;">
+								<span> <svg width="12px" height="9px" viewbox="0 0 12 9">
+										<polyline points="1 5 4 8 11 1"></polyline>
+										</svg>
+							</span> <span>Creer une BLL sans surprise et sans bug</span> <span>4</span>
+								<span>DATE/DATE/DATE</span> <span>NOM PROJET</span>
+							</label>
 						</div>
-						<div class="login__field">
-							<label for="password"></label> <input type="password"
-								name="password" id="password" class="login__input"
-								placeholder="Password"> <br>
-						</div>
-
-						<button class="button login__submit" type="submit">Se
-							connecter</button>
-					</form>
-
+					</div>
 				</div>
+			</div>
+			<div class="linetasks">
+				<h2 id="addTaskText">Ajouter une tâche ?</h2>
+				<form data-th-action="@{/projet/detail(id=${projet.id})}"
+					data-th-object="${tache}" method="post" id="formtache">
+					<label for="inputTitre"></label> <input type="text"
+						name="inputTitre" id="inputTitreTache" data-th-field="*{titre}"
+						placeholder="Titre de la tâche"> <label
+						for="inputPriorite"></label> <select name="inputPriorite"
+						id="inputPriorite" data-th-field="*{statutDePriorite}">
+						<option value="123456789" selected>Niveau de priorité</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select> <label for="inputDateDeFin"></label> <input type="date"
+						min="2024/07/16" max="2029/07/16" name="inputDateDeFin"
+						id="inputDateDeFin" data-th-field="*{dateDeFin}">
+					<textarea name="description" id="description"
+						data-th-field="*{description}"
+						placeholder="Description de votre tâche (optionnel)"></textarea>
+					<button type="submit" class="buttontache">Ajouter la tâche</button>
+					<p style="margin-left: 20px;" id="hideBtn">L</p>
+				</form>
 			</div>
 		</div>
 	</main>

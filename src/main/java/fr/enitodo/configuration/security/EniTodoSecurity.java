@@ -32,8 +32,9 @@ public class EniTodoSecurity {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
-			auth.requestMatchers(HttpMethod.GET, "/projet").permitAll()
-					.requestMatchers(HttpMethod.GET, "/projet/detail").permitAll()
+			auth.requestMatchers(HttpMethod.GET, "/projet").hasAuthority("USER_MEMBER")
+					.requestMatchers(HttpMethod.GET, "/projet/detail").hasAuthority("USER_MEMBER")
+					.requestMatchers(HttpMethod.POST, "/projet/detail").hasAuthority("USER_MEMBER")
 					.requestMatchers(HttpMethod.GET, "/signin").permitAll()
 					.requestMatchers(HttpMethod.POST, "/signin").permitAll()
 					.requestMatchers(HttpMethod.GET, "/aboutus").permitAll();
@@ -45,8 +46,8 @@ public class EniTodoSecurity {
 		//Customiser le formulaire
 		http.formLogin(form -> {
 			form.loginPage("/login").permitAll();
-			form.defaultSuccessUrl("/aboutus");
-			form.failureUrl("/");
+			form.defaultSuccessUrl("/");
+			form.failureUrl("/login");
 			});
 		// Logout --> vider la session et le contexte de sécurité
 		http.logout(logout -> logout
@@ -56,7 +57,6 @@ public class EniTodoSecurity {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/")
 		);
-		
 		return http.build();
 	}
 
