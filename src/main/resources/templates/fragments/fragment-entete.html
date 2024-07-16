@@ -1,12 +1,29 @@
 <header xmlns:th="http://www.thymeleaf.org" id="nav" class="navbar" data-th-fragment="frag-entete">
-        <img src="" id="logoTodo">
+      
+        <img src="/images/logo.png" id="logoTodo">
+        
+        <div class="bienvenue" data-th-if="${#authorization.expression('isAuthenticated()')}">
+    <span style="text-transform: uppercase;">Bienvenue </span>
+    <span data-th-text="${#authentication.name.toUpperCase()}" style="text-transform: uppercase;"></span>
+     <span class="separation">|</span>
+</div>
+
         <a href="/" class="liens">Accueil</a>
+        
+       <th:block th:if="${#authorization.expression('isAuthenticated()')}">
         <a href="/projet" class="liens">Gérer son projet</a>
+        </th:block>
+    
         <a href="/aboutus" class="liens">About us</a>
+        
+        <th:block th:if="${!#authorization.expression('isAuthenticated()')}">
         <a href="/signin" class="liens">Inscription</a>
+          </th:block>
+           <th:block th:if="${!#authorization.expression('isAuthenticated()')}">
         <a href="/login" class="liens">Connexion</a>
-        <div data-th-if="${#authorization.expression('isAuthenticated()')}">
-			<span data-th-text="${#authentication.name}"></span>
-			<h2> HE OH TES CCONNNECCETE HAHAHAHA</h2>
-		</div>	
+        </th:block>
+        <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <a href="/logout" class="liens">Deconnexion</a>
+        </th:block>
+        
 </header>

@@ -237,6 +237,34 @@ body {
     padding: 5px;
 }
 
+.cardsconnect {
+    background-color: rgb(234, 234, 234);
+    height: 90%;
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px rgb(111, 111, 111);
+    transition: 0.25s ease-in-out;
+}
+
+
+
+.cardsconnect > h2 {
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.cardsconnect > hr {
+    width: 70%;
+}
+
+.cardsconnect > p {
+    text-align: center;
+    font-size: 1.15rem;
+    padding: 5px;
+}
+
 .cardstasks {
    background-color:  #FFFFFF;
     height: 100%;
@@ -578,4 +606,95 @@ body {
   .buttontache span {
     line-height: 50px;
   }
+}
+
+.bienvenue {
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+  	font-weight: 300;
+  	font-style: normal;
+  	font-size: 1.25rem;
+}
+
+.separation {
+	margin-left: 10px;
+	margin-right:10px;
+}
+
+.titreconnect {
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+  	font-weight: 300;
+  	font-style: normal;
+  	font-size: 1.25rem;
+  	color: rgb(200, 43, 113);
+  	
+}
+
+.login__field {
+	padding: 10px 0px;	
+	position: relative;	
+}
+
+.login__input {
+	border: none;
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	padding-left: 24px;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+	margin-left: 5%;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+	outline: none;
+	border-bottom-color: #6A679E;
+}
+
+.login__submit {
+	background: #fff;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 16px 20px;
+	border-radius: 26px;
+	border: 1px solid #fc894d;
+	text-transform: uppercase;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	width: 45%;
+	color:  #fc894d;
+	box-shadow: 0px 2px 2px #5C5696;
+	cursor: pointer;
+	transition: .2s;
+	margin-left: 28%;
+	
+}
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+	border-color: #6A679E;
+	outline: none;
+}
+
+.textaboutus {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 60%;
+	height: 80%;
+	text-align: center;
+	color: #ad175a;
+    font-size: 1.25rem;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+  	font-weight: 300;
+  	font-style: normal;
+	
 }
