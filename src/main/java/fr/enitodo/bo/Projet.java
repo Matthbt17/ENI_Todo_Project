@@ -14,8 +14,17 @@ public class Projet implements Serializable {
 	private Tache tache;
 	private long codeProjet;
 	private List<Tache> listeTaches;
+	private String description;
 
-	public Projet(long id, String titre, String pseudo, Tache tache, long codeProjet) {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Projet(long id, String titre, String pseudo, Tache tache, long codeProjet,String description) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -24,17 +33,19 @@ public class Projet implements Serializable {
 		this.codeProjet = codeProjet;
 		this.listeTaches = new ArrayList<>();
 		this.listeTaches.add(tache);
+		this.description = description;
 	}
 	
 	public Projet() {
 		
 	}
 	
-	public Projet(String titre, String pseudo, long codeProjet) {
+	public Projet(String titre, String pseudo, long codeProjet, String description) {
 		this.titre = titre;
 		this.pseudo = pseudo;
 		this.codeProjet = codeProjet;
 		this.listeTaches = new ArrayList<>();
+		this.description = description;
 	}
 
 	public long getId() {
@@ -123,7 +134,9 @@ public class Projet implements Serializable {
 		builder.append("[taches : ");
 		builder.append(tache+"\n");
 		builder.append(", code projet : ");
-		builder.append(codeProjet+"\n"+"\n");
+		builder.append(codeProjet+"\n");
+		builder.append(", description : ");
+		builder.append(description+"\n"+"\n");
 		return builder.toString();
 
 	}

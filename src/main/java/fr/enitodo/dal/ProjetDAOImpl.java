@@ -25,11 +25,12 @@ public class ProjetDAOImpl implements ProjetDAO {
 	@Override
 	public void create(Projet projet) {
 		KeyHolder key = new GeneratedKeyHolder();
-		String sql = "INSERT INTO PROJET(titre, pseudo_membre, code_projet) VALUES (:titre, :pseudoMembre, :codeProjet)";
+		String sql = "INSERT INTO PROJET(titre, pseudo_membre, code_projet, description) VALUES (:titre, :pseudoMembre, :codeProjet, :description)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("titre", projet.getTitre());
 		params.addValue("pseudoMembre", projet.getPseudo());
 		params.addValue("codeProjet", projet.getcodeProjet());
+		params.addValue("description", projet.getDescription());
 		jdbc.update(sql, params, key);
 
 		if(key != null && key.getKey() != null) {
@@ -54,7 +55,7 @@ public class ProjetDAOImpl implements ProjetDAO {
 
 	@Override
 	public Projet read(String titreProjet) {
-		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet FROM PROJET WHERE titre=:titre";
+		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet, description FROM PROJET WHERE titre=:titre";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("titre", titreProjet);
 		return jdbc.queryForObject(sql, params, new BeanPropertyRowMapper<>(Projet.class));
@@ -62,21 +63,21 @@ public class ProjetDAOImpl implements ProjetDAO {
 
 	@Override
 	public Projet read(int id) {
-		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet FROM PROJET WHERE id=:id";
+		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet, description FROM PROJET WHERE id=:id";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
-		return jdbc.queryForObject(sql, params, new BeanPropertyRowMapper<>(Projet.class));
+		return jdbc.queryForObject(sql, params, new ProjetRowMapper());
 	}
 
 	@Override
 	public List<Projet> readAll() {
-		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet FROM PROJET";
-		return jdbc.query(sql, new BeanPropertyRowMapper<>(Projet.class));
+		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet, description FROM PROJET";
+		return jdbc.query(sql, new ProjetRowMapper());
 	}
 	
 	@Override
 	public List<Projet> findAllProjectUser(String username){
-		String sql = "SELECT id, titre, pseudo_membre, code_projet FROM PROJET where pseudo_membre = :pseudoMembre";
+		String sql = "SELECT id, titre, pseudo_membre, code_projet, description FROM PROJET where pseudo_membre = :pseudoMembre";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("pseudoMembre", username);
         
@@ -89,6 +90,7 @@ public class ProjetDAOImpl implements ProjetDAO {
             Projet projet = new Projet();
             projet.setTitre(rs.getString("titre"));
             projet.setId(rs.getInt("id"));
+            projet.setDescription(rs.getString("description"));
             projet.setPseudo(rs.getString("pseudo_membre"));
             projet.setcodeProjet(rs.getLong("code_projet"));
             return projet;

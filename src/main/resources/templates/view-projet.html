@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{}, titre=~{:: title}, main=~{:: main})}">
+	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{:: #monCSS}, titre=~{:: title}, main=~{:: main})}">
 <title>ENI PROJET</title>
+<th:block id="monCSS">
+<link rel="stylesheet" data-th-href="@{/css/projet.css}" >
+</th:block>
 <head>
 
 </head>
 <body>
-	<main>
-		<form data-th-action="@{/projet}" method="post" data-th-object="${projet}">
-		<label for="titre">Titre de votre projet</label>
-		<input type="text" name="titre" id="titreProjet" data-th-field="*{titre}">
-		<label for="codeProjet">Code de votre projet (Ne divulguez pas le code créé) :</label>
-		<input type="number" name="codeProjet" id="codeProjet" data-th-field="*{codeProjet}">
-		<button type="submit">Créer votre projet !</button>
-		</form>
+	<main id="mainBlock">
+		<div id="projetContainer" >
+				<div class="cardsprojects" data-th-each="projet : ${projetListe}">
+				<h2 data-th-text="'PROJET : '+${projet.titre}"></h2>
+				<div id="separator"></div>
+				<p id="descriprojet" data-th-if="${projet.description == null}" data-th-text="'Aucune description de projet fournie'"></p> 
+				<p id="descriprojet" data-th-if="${projet.description != null}" data-th-text="${projet.description}"></p>
+				<button id="btnProjet"><a data-th-href="@{/projet/detail(id=${projet.id})}">Gérer ce projet</a></button>
+			</div>
+			<div class="cardsprojects" id="addProject">
+			<h2>Créer un nouveau projet</h2>
+			<p id="nouveauProjetTxt">+</p>
+			</div>
+		</div>
+		<section id ="sectionFormulaire">
+		<h2>Créer un nouveau projet !</h2>
+			<form data-th-action="@{/projet}" method="post" data-th-object="${projet}" id="formcreaProjet">
+			<label for="titre">Titre de votre projet</label>
+			<input type="text" name="titre" id="titreProjet" data-th-field="*{titre}">
+			<label for="description">Description de votre projet :</label>
+			<textarea name="description" id="description" data-th-field="*{description}"></textarea>
+			<label for="codeProjet">Code secret du projet:</label>
+			<input type="number" name="codeProjet" id="codeProjet" data-th-field="*{codeProjet}">
+			<button type="submit">débuter un nouveau projet</button>
+			</form>
+		</section>
+			<script data-th-src="@{/css/scripts.js}"></script>
 	</main>
+
 </body>
 </html>

@@ -33,6 +33,7 @@ public class EniTodoSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers(HttpMethod.GET, "/projet").permitAll()
+					.requestMatchers(HttpMethod.GET, "/projet/detail").permitAll()
 					.requestMatchers(HttpMethod.GET, "/signin").permitAll()
 					.requestMatchers(HttpMethod.POST, "/signin").permitAll()
 					.requestMatchers(HttpMethod.GET, "/aboutus").permitAll();

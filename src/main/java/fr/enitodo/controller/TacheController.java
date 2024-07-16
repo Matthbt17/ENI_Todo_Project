@@ -25,7 +25,7 @@ import fr.enitodo.bo.Utilisateur;
 
 @Controller
 @RequestMapping("/projet")
-@SessionAttributes({ "projetsEnSession", "MembreEnSession" })
+@SessionAttributes({ "projetsEnSession" })
 public class TacheController {
 
     private TacheService tacheService;
@@ -40,13 +40,6 @@ public class TacheController {
     public List<Projet> chargerProjetUtilisateur(){
     		List<Projet> listeProjet = new ArrayList<>();
     	return listeProjet;
-    }
-    
-    @ModelAttribute("membreEnSession")
-    public Utilisateur chargerUtilisateur() {
-    	Utilisateur test = new Utilisateur();
-    	System.out.println("Chargement de l'utilisateur par défaut");
-    	return test;
     }
     
 	@GetMapping("/taches")
@@ -68,9 +61,8 @@ public class TacheController {
     					@CurrentSecurityContext(expression="authentication?.name") String userLogged,
     					Model model) {
     	model.addAttribute("projet", new Projet());
-    	System.out.println("User logged : "+userLogged);
     	lstProjets = projetService.readAllProjetMember(userLogged);
-    	System.out.println(lstProjets);
+    	model.addAttribute("projetListe", lstProjets);
     	return "view-projet";
     }
     
@@ -79,9 +71,17 @@ public class TacheController {
     				  String userLogged,
     				  @ModelAttribute("projet") Projet projet) {
     	projet.setPseudo(userLogged);
-    	System.out.println(projet);
     	projetService.creerProjet(projet);
     	System.out.println("PSEUDO DU PROJET = "+projet.getPseudo());
     	return "redirect:/";
+    }
+    
+    @GetMapping("/detail")
+    public String afficherDetailProjet(
+    		@RequestParam(name = "id", required = true) int id,
+    		@ModelAttribute("projet") Projet projet,
+			Model model) {
+    	projet = projetService.read(id);
+		return "view-projet-detail";
     }
 }
