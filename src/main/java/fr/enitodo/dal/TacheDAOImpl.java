@@ -35,7 +35,7 @@ public class TacheDAOImpl implements TacheDAO {
 
 	@Override
 	public Tache read(String titre) {
-		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description FROM TACHE WHERE titre =:titre";
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description, isComplete FROM TACHE WHERE titre =:titre";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("titre", titre);
 		return jdbc.queryForObject(sql, params, new TacheRowMapper());
@@ -68,14 +68,14 @@ public class TacheDAOImpl implements TacheDAO {
 
 	@Override
 	public List<Tache> findAll() {
-		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description FROM TACHE";
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description, isComplete FROM TACHE";
 		return jdbc.query(sql, new TacheRowMapper());
 	}
 	
 	@Override
 	public List<Tache> findAllTaskProjet(long id) {
 		System.out.println("L'ID est de : "+id);
-		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description FROM TACHE"
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description, isComplete FROM TACHE"
 				+ " WHERE id_projet = :idProjet";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("idProjet", id);
@@ -94,9 +94,37 @@ public class TacheDAOImpl implements TacheDAO {
         	tache.setStatutDePriorite(rs.getInt("statut_de_priorite"));
             tache.setIdProjet(rs.getInt("id_projet"));
             tache.setDescription(rs.getString("description"));
+            tache.setComplete(rs.getBoolean("isComplete"));
             return tache;
         }
     }
+
+	@Override
+	public Tache findById(int id) {
+		String sql = "SELECT id, titre, date_de_fin, statut_de_priorite, id_projet, description, isComplete FROM TACHE"
+				+ " WHERE id = :id";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+		return jdbc.queryForObject(sql, params, new TacheRowMapper());
+	}
+
+	@Override
+	public void archiverTache(int id) {
+		String sql = "UPDATE TACHE SET isComplete = 1 WHERE id=:id";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+		jdbc.update(sql, params);
+		System.out.println("La tâche a été archivée");
+	}
+	
+	@Override
+	public void desarchiverTache(int id) {
+		String sql = "UPDATE TACHE SET isComplete = 0 WHERE id=:id";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+		jdbc.update(sql, params);
+		System.out.println("La tâche a été désarchivée");
+	}
 
 	
 

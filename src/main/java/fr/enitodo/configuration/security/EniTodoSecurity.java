@@ -37,6 +37,8 @@ public class EniTodoSecurity {
 					.requestMatchers(HttpMethod.POST, "/projet/detail").hasAuthority("USER_MEMBER")
 					.requestMatchers(HttpMethod.GET, "/signin").permitAll()
 					.requestMatchers(HttpMethod.POST, "/signin").permitAll()
+					.requestMatchers(HttpMethod.GET, "/projet/detail/tache").hasAuthority("USER_MEMBER")
+					.requestMatchers(HttpMethod.GET, "/projet/detail/tache/unarchive").hasAuthority("USER_MEMBER")
 					.requestMatchers(HttpMethod.GET, "/aboutus").permitAll();
 			auth.requestMatchers("/*").permitAll();
 			auth.requestMatchers("/css/*").permitAll();

@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{:: #monCSS}, titre=~{:: title}, main=~{:: main})}">
+	data-th-replace="~{layouts/layout :: main-layout-nofooter(head=~{:: #moncss}, titre=~{:: title}, main=~{:: main})}">
 <title>ENI PROJET</title>
-<th:block id="monCSS">
+<th:block id="moncss">
 	<link rel="stylesheet" data-th-href="@{/css/tache.css}">
 </th:block>
 <body>
 	<main id="mainFormBlock">
 		<div id="container-tache">
 			<div id="cardsContainertasks">
+				<button id="showFormBtn">+</button>
 				<div class="cardstasks">
 					<h2 data-th-text="'Détails du projet : '+${projet.titre}"></h2>
 					<hr>
 					<div data-th-if="${#lists.isEmpty(registeredTasks)}"
 						data-th-text="'YA RIEN CA REND FOU'"></div>
-					<div data-th-if="${not #lists.isEmpty(registeredTasks)}"
-						data-th-each="tache : ${registeredTasks}">
-						<h1 data-th-text="${tache.titre}"></h1>
-						<h2 data-th-text="${tache.dateDeFin}"></h2>
-					</div>
-					
-					<div class="">
-						<div class="checkbox-wrapper-15">
-							<input class="inp-cbx" id="cbx-15" type="checkbox"
-								style="display: none;" /> <label class="cbx" for="cbx-15"
-								style="display: flex; justify-content: space-between;">
-								<span> <svg width="12px" height="9px" viewbox="0 0 12 9">
-										<polyline points="1 5 4 8 11 1"></polyline>
-										</svg>
-							</span> <span>Creer une BLL sans surprise et sans bug</span> <span>4</span>
-								<span>DATE/DATE/DATE</span> <span>NOM PROJET</span>
-							</label>
-						</div>
+					<div id="task-container">
+						<th:block data-th-if="${not #lists.isEmpty(registeredTasks)}"
+							data-th-each="tache : ${registeredTasks}">
+							<div data-th-if="${!tache.isComplete}" class="divtasks">
+								<span data-th-text="${tache.titre}"></span> <span
+									data-th-text="'Priorité : '+${tache.statutDePriorite}"></span>
+								<span data-th-text="'Deadline : '+${tache.dateDeFin}"></span> <a
+									data-th-href="@{/projet/detail/tache(id=${tache.id})}"><button>Archiver</button></a>
+								<th:block data-th-if="${!#strings.isEmpty(tache.description)}">
+									<img src="/images/info.png" class="infobulle" draggable="false">
+									<p class="infobulleText" data-th-text="${tache.description}"></p>
+								</th:block>
+							</div>
+						</th:block>
+						<h2>Tâches archivées</h2>
+						<th:block data-th-if="${not #lists.isEmpty(registeredTasks)}"
+							data-th-each="tache : ${registeredTasks}">
+							<th:block data-th-if="${tache.isComplete}">
+								<div class="divtasks">
+									<span data-th-text="${tache.titre}"></span> <span
+										data-th-text="'Priorité : '+${tache.statutDePriorite}"></span>
+									<span data-th-text="'Deadline : '+${tache.dateDeFin}"></span> <a
+										data-th-href="@{/projet/detail/tache/unarchive(id=${tache.id})}"><button>Désarchiver</button></a>
+									<th:block data-th-if="${!#strings.isEmpty(tache.description)}">
+										<img src="/images/info.png" class="infobulle"
+											draggable="false">
+										<p class="infobulleText" data-th-text="${tache.description}"></p>
+									</th:block>
+								</div>
+							</th:block>
+						</th:block>
 					</div>
 				</div>
 			</div>
-			<div class="linetasks">
+			<div class="linetasks" id="borderForm">
 				<h2 id="addTaskText">Ajouter une tâche ?</h2>
 				<form data-th-action="@{/projet/detail(id=${projet.id})}"
 					data-th-object="${tache}" method="post" id="formtache">
@@ -58,10 +72,12 @@
 						data-th-field="*{description}"
 						placeholder="Description de votre tâche (optionnel)"></textarea>
 					<button type="submit" class="buttontache">Ajouter la tâche</button>
-					<p style="margin-left: 20px;" id="hideBtn">L</p>
 				</form>
 			</div>
 		</div>
+		<script data-th-src="@{/css/tache.js}"></script>
+
 	</main>
 </body>
 </html>
+

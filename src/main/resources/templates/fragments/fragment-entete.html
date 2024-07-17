@@ -1,6 +1,6 @@
 <header xmlns:th="http://www.thymeleaf.org" id="nav" class="navbar" data-th-fragment="frag-entete">
       
-        <a href="/"><img src="/images/logo.png" id="logoTodo"></a>
+        <a href="/"><div class="logo"><img src="/images/logo.png" id="logoTodo"></div></a>
         
         <div class="bienvenue" data-th-if="${#authorization.expression('isAuthenticated()')}">
     <span style="text-transform: uppercase;">Bienvenue </span>

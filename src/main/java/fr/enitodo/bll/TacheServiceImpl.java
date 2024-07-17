@@ -43,4 +43,20 @@ public class TacheServiceImpl implements TacheService {
 		return tacheDAO.findAllTaskProjet(id);
 	}
 
+	@Override
+	public Tache findById(int id) {
+		return tacheDAO.findById(id);
+	}
+
+	@Override
+	public void archiverTache(int id) {
+		tacheDAO.archiverTache(id);
+	}
+
+	@Override
+	public void desarchiverTache(int id) {
+		tacheDAO.desarchiverTache(id);
+		
+	}
+
 }

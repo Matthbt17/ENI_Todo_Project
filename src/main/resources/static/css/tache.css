@@ -1,5 +1,6 @@
 body{
 	overflow-y: auto;
+	font-family: 'Helvetica', sans-serif;
 }
 
 #container-tache {
@@ -28,10 +29,10 @@ body{
 
 
 .linetasks {
-	background-color: white;
+	background-color: rgb(244, 244, 244);
 	color:  rgb(200,43,113);
-    width: 45%;
-    height: 25%;
+    width: 50%;
+    height: 40%;
     z-index: 50;
     display: flex;
     justify-content: center;
@@ -43,12 +44,76 @@ body{
     box-shadow: 2px 5px 10px rgb(111, 111, 111);
     transition: 0.25s ease-in-out;
     position: fixed;
-    bottom: 2%;
+    border: 5px solid rgb(200,43,113);
+    top: 30%;
+    visibility: hidden;
+    opacity: 0%;
+}
+
+.divtasks {
+	background-color: white;
+	color:  rgb(200,43,113);
+    width: 80%;
+    min-height: 50px;
+    z-index: 50;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px rgb(111, 111, 111);
+    transition: 0.25s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.divtasks > span {
+	padding-right: 10px;
+	border-right: 2px solid #1c1c1c;
+}
+
+.divtasks > span:last-of-type {
+	padding-right: none;
+	border-right: none;
+}
+
+.infobulle {
+	height: 60%;
+	cursor: pointer;
+}
+
+.infobulleText {
+	visibility: hidden;
+	background-color: rgb(237, 237, 237);
+	height: fit-content;
+	width: 500px;
+	position: absolute;
+	padding: 20px;
+	text-align: justify;
+	border-radius: 20px;
+	color: black;
+	bottom: 75%;
+	right: 5%;
+	opacity: 0%;
+	transition: 0.25s ease-in-out;
+}
+
+#task-container {
+	width:90%;
+	height: 80%;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+	align-items: center;
+	overflow: auto;
+	overflow-x: hidden;
 }
 
 .cardstasks {
    background-color:  #FFFFFF;
-    height: 90%;
+    height: 85vh;
     width : 90%;
     aspect-ratio: 1 / 1;
     border-radius: 25px;
@@ -58,6 +123,9 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    overflow: auto;
+    position: relative;
+    top: 3%;
 }
 
 .cardstasks:hover{
@@ -90,12 +158,42 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
+  margin-top:-10%;
+  
+}
+
+#showFormBtn {
+	position: fixed;
+	top: 16%;
+	right: 9.3%;
+	height: 120px;
+	width: 120px;
+	border: none;
+	border-top-right-radius: 50px 50px;
+	border-bottom-right-radius: 50px 50px;
+	background: rgb(200,43,113);
+    background: linear-gradient(0deg, rgba(200, 43, 114, 0.6) 0%, rgba(206, 125, 74, 0.6) 100%);
+    border-right: 3px solid white;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    color: white;
+    font-size: 5rem;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+#showFormBtn:hover {
+	 color: black;
+	 border-right: 3px solid black;
+     border-top: 3px solid black;
+     border-bottom: 3px solid black;
+     transition: 0.25s ease-in-out;
 }
 
 #inputTitreTache {
     background: transparent;
     width: 20%;
-    height: 10%;
+    height: 6%;
     padding: 1em;
     border: none;
     border-left: 1px solid white;
@@ -120,7 +218,7 @@ body{
 
 #description {
 	width: 80%;
-	height: 30%;
+	height: 20%;
 	border: none;
 	border-radius: 5px;
 	border: 2px solid rgba(200,43,113,1);
@@ -128,12 +226,13 @@ body{
 	background-color: white;
 	font-family: 'Helvetica', sans-serif;
 	resize: none;
+	margin-top: -5%;
 }
 
 #inputPriorite {
 	background-color: white;
     width: fit-content;
-    height: 20%;
+    height: 12%;
     border: none;
     border-left: 1px solid white;
     border-top: 1px solid white;
@@ -141,20 +240,22 @@ body{
     box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
     color: rgb(200,43,113);
     padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 #addTaskText {
-	position: absolute;
+	position: relative;
 	font-family: 'Helvetica', sans-serif;
 	text-transform: uppercase;
-	top: -20%;
+	top: 1%;
 	z-index: 50;
 }
 
 #inputDateDeFin {
     background: transparent;
     width: 20%;
-    height: 10%;
+    height: 6%;
     padding: 1em;
     border: none;
     border-left: 1px solid white;
@@ -207,6 +308,7 @@ body{
   align-items: center;
   position: relative;
   bottom: 2%;
+  margin-top: -7%;
 }
 
 .buttontache:active {
@@ -234,120 +336,5 @@ body{
 
   .buttontache span {
     line-height: 50px;
-  }
-}
-
-/* FIN DU FORMULAIRE ICI */
-
-
-/* PASSAGE ANIMATION */
-
-.checkbox-wrapper-15 {
-  margin: auto;
-  
-}
-
-.checkbox-wrapper-15 .cbx {
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  
-  
-}
-
-.checkbox-wrapper-15 .cbx span {
-  display: inline-block;
-  vertical-align: middle;
-  transform: translate3d(0, 0, 0);
-  margin-left : 15px;
-}
-
-.checkbox-wrapper-15 .cbx span:first-child {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transform: scale(1);
-  vertical-align: middle;
-  border: 1px solid #B9B8C3;
-  transition: all 0.2s ease;
-}
-
-.checkbox-wrapper-15 .cbx span:first-child svg {
-  position: absolute;
-  z-index: 1;
-  top: 8px;
-  left: 6px;
-  fill: none;
-  stroke: white;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 16px;
-  stroke-dashoffset: 16px;
-  transition: all 0.3s ease;
-  transition-delay: 0.1s;
-  transform: translate3d(0, 0, 0);
-}
-
-.checkbox-wrapper-15 .cbx span:first-child:before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: rgb(200,43,113);
-  display: block;
-  transform: scale(0);
-  opacity: 1;
-  border-radius: 50%;
-  transition-delay: 0.2s;
-}
-
-.checkbox-wrapper-15 .cbx span:last-child {
-  margin-left: 8px;
-}
-
-.checkbox-wrapper-15 .cbx span:last-child:after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: #B9B8C3;
-  transform-origin: 0 0;
-  transform: scaleX(0);
-}
-
-.checkbox-wrapper-15 .cbx:hover span:first-child {
-  border-color: rgb(200,43,113);
-}
-
-.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child {
-  border-color: rgb(200,43,113);
-  background: rgb(200,43,113);
-  animation: check-15 0.6s ease;
-}
-
-.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child svg {
-  stroke-dashoffset: 0;
-}
-
-.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:first-child:before {
-  transform: scale(2.2);
-  opacity: 0;
-  transition: all 0.6s ease;
-}
-
-
-.checkbox-wrapper-15 .inp-cbx:checked + .cbx span:nth-child(2) {
-  text-decoration: line-through;
-}
-
-@keyframes check-15 {
-  50% {
-    transform: scale(1.2);
   }
 }

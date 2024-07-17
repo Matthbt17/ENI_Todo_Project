@@ -84,7 +84,6 @@ public class TacheController {
     				  @ModelAttribute("projet") Projet projet) {
     	projet.setPseudo(userLogged);
     	projetService.creerProjet(projet);
-    	System.out.println("PSEUDO DU PROJET = "+projet.getPseudo());
     	return "redirect:/";
     }
     
@@ -97,12 +96,36 @@ public class TacheController {
 			Model model) {
     	projet = projetService.read(id);
     	model.addAttribute("projet", projet);
-    	System.out.println(projet);
     	listeTache = tacheService.getTacheParProjet(projet.getId());
-    	System.out.println(listeTache);
     	model.addAttribute("registeredTasks", listeTache);
     	model.addAttribute("tache", new Tache());
 		return "view-projet-detail";
+    }
+    
+    @GetMapping("/detail/tache")
+    public String archiverTache(
+    		@RequestParam(name="id", required=true) int id,
+    		@ModelAttribute("projet") Projet projet,
+    		Model model
+    		) {
+    	Tache tache = tacheService.findById(id);
+    	projet = projetService.read(tache.getIdProjet());
+    	tacheService.archiverTache(id);
+    	return "redirect:/projet/detail?id="+projet.getId();
+    }
+    
+    ///projet/detail/tache/unarchive(id=${tache.id})
+    
+    @GetMapping("/detail/tache/unarchive")
+    public String desarchiverTache(
+    		@RequestParam(name="id", required=true) int id,
+    		@ModelAttribute("projet") Projet projet,
+    		Model model
+    		) {
+    	Tache tache = tacheService.findById(id);
+    	projet = projetService.read(tache.getIdProjet());
+    	tacheService.desarchiverTache(id);
+    	return "redirect:/projet/detail?id="+projet.getId();
     }
     
     @PostMapping("/detail")

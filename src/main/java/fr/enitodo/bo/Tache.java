@@ -88,6 +88,10 @@ public class Tache implements Serializable {
 		builder.append(id+"\n");
 		builder.append("titre : ");
 		builder.append(titre+"\n");
+		builder.append("isComplete : ");
+		builder.append(isComplete+"\n");
+		builder.append("description : ");
+		builder.append(description+"\n");
 		builder.append("id PROJET : ");
 		builder.append(idProjet+"\n");
 		builder.append("Dead Line :");

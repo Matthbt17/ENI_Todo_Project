@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-data-th-replace="~{layouts/layout :: main-layout(head=~{}, titre=~{:: title}, main=~{:: main})}">
+	data-th-replace="~{layouts/layout :: main-layout(head=~{}, titre=~{:: title}, main=~{:: main})}">
 <title>S'inscrire</title>
 <head>
 
 </head>
 <body>
-<main>
-<div id="container">
-        <div id="cardsContainer">
-<div class="cardsconnect">
-<h2>Inscription</h2>
-<hr>
-<form data-th-action="@{/signin}" method="post" id="forminscription"
-data-th-object="${user}" class="login">
-<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
-<div class="login__field">
-<label for="inputPseudo"></label> <input type="text" name="inputPseudo"
-id="inputPseudo" required data-th-field="*{pseudo}" class="login__input" placeholder="Pseudo">
-<br></div>
-<div class="login__field">
-<label for="inputPassword"></label> <input type="password"
-name="inputPassword" id="inputPassword" required data-th-field="*{password}" class="login__input" placeholder="Password">
-<br></div>
-<button class="button login__submit" type="submit">S'inscrire</button>
-</form>
-</div>
-</div>
-</div>
-</main>
+	<main>
+		<div id="container">
+			<div id="cardsContainer">
+				<div class="cardsconnect">
+					<h2 class="titreCard">Inscription</h2>
+					<hr>
+					<form data-th-action="@{/signin}" method="post"
+						id="forminscription" data-th-object="${user}" class="login">
+						<div
+							data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+						<div class="login__field">
+							<label for="inputPseudo"></label> <input type="text"
+								name="inputPseudo" id="inputPseudo" required
+								data-th-field="*{pseudo}" class="login__input"
+								placeholder="Pseudo"> <br>
+						</div>
+						<div class="login__field">
+							<label for="inputPassword"></label> <input type="password"
+								name="inputPassword" id="inputPassword" required
+								data-th-field="*{password}" class="login__input"
+								placeholder="Password"> <br>
+						</div>
+						<button class="button login__submit" type="submit">S'inscrire</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
 </html>

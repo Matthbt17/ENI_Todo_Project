@@ -11,5 +11,7 @@ void createTache(Tache tache);
 void delete(Tache tache);
 List<Tache> findAll();
 List<Tache> findAllTaskProjet(long id);
-
+Tache findById(int id);
+void archiverTache(int id);
+void desarchiverTache(int id);
 }
