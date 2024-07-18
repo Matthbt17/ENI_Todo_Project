@@ -27,6 +27,7 @@ infobulles.forEach((infobulle, index) => {
 	infobulle.addEventListener("mouseenter", (event) => {
 		infobulleText.style.visibility = 'visible';
 		infobulleText.style.opacity = '100%';
+		console.log(infobulleText);
 	});
 
 	infobulle.addEventListener("mouseout", (event) => {

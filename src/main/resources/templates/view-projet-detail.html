@@ -7,12 +7,13 @@
 	<link rel="stylesheet" data-th-href="@{/css/tache.css}">
 </th:block>
 <body>
-	<main id="mainFormBlock">
+	<main id="mainFormBlock" data-th-object="${tache}" >
 		<div id="container-tache">
 			<div id="cardsContainertasks">
 				<button id="showFormBtn">+</button>
 				<div class="cardstasks">
 					<h2 data-th-text="'Détails du projet : '+${projet.titre}"></h2>
+					<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}" class="erreur-form-tache"></div>
 					<hr>
 					<div data-th-if="${#lists.isEmpty(registeredTasks)}"
 						data-th-text="'YA RIEN CA REND FOU'"></div>
@@ -52,32 +53,10 @@
 			</div>
 			<div class="linetasks" id="borderForm">
 				<h2 id="addTaskText">Ajouter une tâche ?</h2>
-				<form data-th-action="@{/projet/detail(id=${projet.id})}"
-					data-th-object="${tache}" method="post" id="formtache">
-					<label for="inputTitre"></label> <input type="text"
-						name="inputTitre" id="inputTitreTache" data-th-field="*{titre}"
-						placeholder="Titre de la tâche"> <label
-						for="inputPriorite"></label> <select name="inputPriorite"
-						id="inputPriorite" data-th-field="*{statutDePriorite}">
-						<option value="123456789" selected>Niveau de priorité</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select> <label for="inputDateDeFin"></label> <input type="date"
-						min="2024/07/16" max="2029/07/16" name="inputDateDeFin"
-						id="inputDateDeFin" data-th-field="*{dateDeFin}">
-					<textarea name="description" id="description"
-						data-th-field="*{description}"
-						placeholder="Description de votre tâche (optionnel)"></textarea>
-					<button type="submit" class="buttontache">Ajouter la tâche</button>
-				</form>
+				<div data-th-replace="~{fragments/fragment-projet-detail :: frag-projet-form('/projet/detail')}"></div>
 			</div>
 		</div>
 		<script data-th-src="@{/css/tache.js}"></script>
-
 	</main>
 </body>
 </html>
-

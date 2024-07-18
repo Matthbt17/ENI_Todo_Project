@@ -1,0 +1,29 @@
+<form xmlns:th="http://www.thymeleaf.org"
+      data-th-fragment="frag-projet-form(action)"
+      data-th-action="@{/projet/detail(id=${projet.id})}"
+      data-th-object="${tache}" method="post" id="formtache">
+
+    <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+
+    <label for="inputTitre"></label>
+    <input type="text" name="inputTitre" id="inputTitreTache" data-th-field="*{titre}" placeholder="Titre de la tâche" >
+
+    <label
+	for="inputPriorite"></label> <select name="inputPriorite"
+		id="inputPriorite" data-th-field="*{statutDePriorite}">
+		<option value="123456789" selected>Niveau de priorité</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+
+    <label for="inputDateDeFin"></label>
+    <input type="date" name="inputDateDeFin" id="inputDateDeFin" data-th-field="*{dateDeFin}" min="2024/07/16" max="2029/07/16" >
+    <label for="description">Description de la tâche (optionnel)</label>
+    <textarea name="description" id="description" data-th-field="*{description}" rows="4" cols="50"></textarea>
+
+    <button type="submit" class="buttontache">Ajouter la tâche</button>
+
+</form>

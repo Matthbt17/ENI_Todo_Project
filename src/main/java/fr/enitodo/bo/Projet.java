@@ -4,15 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Projet implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private long id;
+	
+	@NotBlank
 	private String titre;
+	
 	private String pseudo;
 	private Tache tache;
+	
+	@NotBlank
+	@Size(min = 100, max= 99999, message = "Le titre doit avoir au moins 4 caractères")
 	private long codeProjet;
+	
 	private List<Tache> listeTaches;
 	private String description;
 

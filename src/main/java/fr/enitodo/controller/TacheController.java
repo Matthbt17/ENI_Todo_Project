@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,8 @@ import fr.enitodo.bll.TacheService;
 import fr.enitodo.bo.Projet;
 import fr.enitodo.bo.Tache;
 import fr.enitodo.bo.Utilisateur;
+import fr.enitodo.exceptions.BusinessException;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/projet")
@@ -132,11 +135,26 @@ public class TacheController {
     String creaTache(
     		@RequestParam(name = "id", required = true) int id,
     		@ModelAttribute("projet") Projet projet,
-    		@ModelAttribute("tache") Tache tache,
-    		Model model) {
-    	model.addAttribute("projet", projet);
+    		@Valid @ModelAttribute("tache") Tache tache,
+    		BindingResult bindingResult,
+    		Model model
+    		) {
     	tache.setIdProjet(id);
-    	tacheService.createTache(tache);
-    	return "redirect:/projet";
+    	projet = projetService.read(tache.getIdProjet());
+    	model.addAttribute("projet", projet);
+    	if(bindingResult.hasErrors()) {
+    		return "view-projet-detail";
+    	} else {
+    		try {
+    	    	tacheService.createTache(tache);
+    		} catch(BusinessException e) {
+    			e.getClefsExternalisations().forEach(key -> {
+    				ObjectError error = new ObjectError("globalError", key);
+    				bindingResult.addError(error);
+    			});
+    			return "view-projet-detail";
+    		}
+    	}
+    	return "redirect:/projet/detail?id="+projet.getId();
     }
 }

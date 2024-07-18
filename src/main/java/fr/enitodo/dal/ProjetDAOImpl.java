@@ -96,4 +96,12 @@ public class ProjetDAOImpl implements ProjetDAO {
             return projet;
         }
     }
+
+	@Override
+	public Projet readParCodeProjet(long codeProjet) {
+		String sql = "SELECT id, titre, pseudo_membre, code_projet, description FROM PROJET where code_projet = :codeProjet";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("codeProjet", codeProjet);
+		return jdbc.queryForObject(sql, params, new ProjetRowMapper());
+	}
 }

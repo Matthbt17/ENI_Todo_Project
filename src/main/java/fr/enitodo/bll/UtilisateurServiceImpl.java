@@ -106,5 +106,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 			be.add(BusinessCode.VALIDATION_PSEUDO_EXIST);
 		}
 	}
+	
+	/**
+	 * MÃ©thode de validation
+	 */
+	
 
 }
