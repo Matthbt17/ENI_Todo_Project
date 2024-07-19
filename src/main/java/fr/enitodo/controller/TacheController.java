@@ -84,9 +84,22 @@ public class TacheController {
     @PostMapping
     String creaProjet(@CurrentSecurityContext(expression="authentication?.name")
     				  String userLogged,
-    				  @ModelAttribute("projet") Projet projet) {
-    	projet.setPseudo(userLogged);
-    	projetService.creerProjet(projet);
+    				  @ModelAttribute("projet") Projet projet, BindingResult bindingResult) {
+    	if(bindingResult.hasErrors()) {
+    		return "view-projet";
+    	} else {
+    		try {
+    			System.out.println("On essaye de valider le projet ici ! ");
+    			projet.setPseudo(userLogged);
+    	    	projetService.creerProjet(projet);
+    		} catch(BusinessException e) {
+    			e.getClefsExternalisations().forEach(key -> {
+    				ObjectError error = new ObjectError("globalError", key);
+    				bindingResult.addError(error);
+    			});
+    			return "view-projet";
+    		}
+    	}
     	return "redirect:/";
     }
     
@@ -96,13 +109,41 @@ public class TacheController {
     		@ModelAttribute("projet") Projet projet,
     		@ModelAttribute("tache") Tache tache,
     		@ModelAttribute("registeredTasks") List<Tache> listeTache,
+    		@ModelAttribute("newProjet") Projet newProjet,
 			Model model) {
     	projet = projetService.read(id);
+    	System.out.println(projet);
     	model.addAttribute("projet", projet);
     	listeTache = tacheService.getTacheParProjet(projet.getId());
     	model.addAttribute("registeredTasks", listeTache);
     	model.addAttribute("tache", new Tache());
 		return "view-projet-detail";
+    }
+    
+    @PostMapping("/add")
+    public String ajouterCodeProjet(
+    		@RequestParam(name="codeDuProjet", required=true) int code,
+    		@ModelAttribute("newProjet") Projet newProjet,
+    		Model model) {
+    		int verif = projetService.readCode(code);
+    		System.out.println("La vérif renvoie ça : "+verif);
+    		if(verif > 0) {
+    			newProjet = projetService.readParCode(code);
+    			System.out.println(newProjet);
+    			/*
+    			 * TODO : INSERTION DANS LE SQL DES PROJETS PARTAGES
+    			 */
+    		} else {
+    			System.out.println("Le code n'existe pas, ajout impossible");
+    		}
+    	return "redirect:/projet";
+    }
+    
+    @GetMapping("/add")
+    public String ajouterCodeProjetBis(
+    		@ModelAttribute("newProjet") Projet newProjet,
+    		Model model) {
+    	return "view-inserer-projet";
     }
     
     @GetMapping("/detail/tache")

@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	<main id="mainBlock">
+	<main id="mainBlock"  >
 		<div id="projetContainer" >
 				<div class="cardsprojects" data-th-each="projet : ${projetListe}">
 				<h2 data-th-text="'PROJET : '+${projet.titre}"></h2>
@@ -19,14 +19,16 @@
 				<p id="descriprojet" data-th-if="${projet.description != null}" data-th-text="${projet.description}"></p>
 				<button id="btnProjet"><a data-th-href="@{/projet/detail(id=${projet.id})}">Gérer ce projet</a></button>
 			</div>
-			<div class="cardsprojects" id="addProject">
+			<div class="cardsprojects" id="addProject" data-th-object="${projet}">
 			<h2>Créer un nouveau projet</h2>
 			<p id="nouveauProjetTxt">+</p>
+			<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}" class="erreur-form-projet"></div>
 			</div>
 		</div>
-		<section id ="sectionFormulaire">
+		<section id ="sectionFormulaire" data-th-object="${projet}">
 		<h2>Créer un nouveau projet !</h2>
-			<form data-th-action="@{/projet}" method="post" data-th-object="${projet}" id="formcreaProjet">
+		<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}" class="erreur-form-tache"></div>
+			<form data-th-action="@{/projet}" method="post"  id="formcreaProjet">
 			<label for="titre">Titre de votre projet</label>
 			<input type="text" name="titre" id="titreProjet" data-th-field="*{titre}">
 			<label for="description">Description de votre projet :</label>
@@ -34,6 +36,7 @@
 			<label for="codeProjet">Code secret du projet:</label>
 			<input type="number" name="codeProjet" id="codeProjet" data-th-field="*{codeProjet}">
 			<button type="submit">débuter un nouveau projet</button>
+			<button><a href="/projet/add">Ou.. Insérer un projet existant ?</a></button>
 			</form>
 		</section>
 			<script data-th-src="@{/css/scripts.js}"></script>

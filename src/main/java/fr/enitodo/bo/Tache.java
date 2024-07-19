@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class Tache implements Serializable {
@@ -21,12 +22,10 @@ public class Tache implements Serializable {
 	@Size(min = 2, max=250, message = "Le titre doit avoir au moins 4 caractères")
 	private String titre;
 	
-	@NotBlank
+	@NotNull
 	private LocalDate dateDeFin;
 	
-	@NotBlank
-	@Min(1)
-	@Max(5)
+	@NotNull
 	private int statutDePriorite;
 	
 	private boolean isComplete;

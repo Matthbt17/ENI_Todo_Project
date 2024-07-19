@@ -1,0 +1,13 @@
+<form xmlns:th="http://www.thymeleaf.org"
+      data-th-fragment="frag-tchat-form(action)"
+      data-th-action="@{/tchat}"
+      data-th-object="${tchat}" method="post" id="formtchat">
+
+ 
+
+    <label for="message">Message</label>
+    <textarea name="message" id="message" data-th-field="*{message}" rows="4" cols="50"></textarea>
+
+    <button type="submit" class="buttontache">Ajouter message</button>
+
+</form>

@@ -29,7 +29,7 @@ public class ProjetDAOImpl implements ProjetDAO {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("titre", projet.getTitre());
 		params.addValue("pseudoMembre", projet.getPseudo());
-		params.addValue("codeProjet", projet.getcodeProjet());
+		params.addValue("codeProjet", projet.getCodeProjet());
 		params.addValue("description", projet.getDescription());
 		jdbc.update(sql, params, key);
 
@@ -68,6 +68,15 @@ public class ProjetDAOImpl implements ProjetDAO {
 		params.addValue("id", id);
 		return jdbc.queryForObject(sql, params, new ProjetRowMapper());
 	}
+	
+	@Override
+	public Projet recupParCodeProjet(int code) {
+		System.out.println("Le code à rechercher est : "+code);
+		String sql = "SELECT id, titre, pseudo_membre, id_tache, code_projet, description FROM PROJET WHERE code_projet=:codeProjet";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("codeProjet", code);
+		return jdbc.queryForObject(sql, params, new ProjetRowMapper());
+	}
 
 	@Override
 	public List<Projet> readAll() {
@@ -84,6 +93,16 @@ public class ProjetDAOImpl implements ProjetDAO {
 		return jdbc.query(sql, params, new ProjetRowMapper());
 	}
 	
+	@Override
+	public int readParCodeProjet(long codeProjet) {
+		System.out.println("on essaye de read le projet");
+		String sql = "SELECT count(code_projet) FROM PROJET WHERE code_projet = :codeProjet";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("codeProjet", codeProjet);
+		return jdbc.queryForObject(sql, params, Integer.class);
+	}
+	
+	
 	private static class ProjetRowMapper implements RowMapper<Projet> {
         @Override
         public Projet mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -92,16 +111,13 @@ public class ProjetDAOImpl implements ProjetDAO {
             projet.setId(rs.getInt("id"));
             projet.setDescription(rs.getString("description"));
             projet.setPseudo(rs.getString("pseudo_membre"));
-            projet.setcodeProjet(rs.getLong("code_projet"));
+            projet.setCodeProjet(rs.getInt("code_projet"));
             return projet;
         }
     }
 
-	@Override
-	public Projet readParCodeProjet(long codeProjet) {
-		String sql = "SELECT id, titre, pseudo_membre, code_projet, description FROM PROJET where code_projet = :codeProjet";
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("codeProjet", codeProjet);
-		return jdbc.queryForObject(sql, params, new ProjetRowMapper());
-	}
+
+	
+
+	
 }

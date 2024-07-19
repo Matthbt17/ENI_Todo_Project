@@ -1,0 +1,123 @@
+textarea {
+	resize: none;
+	overflow: hidden;
+	height: 1.25em;
+	padding: 0;
+	border: none;
+	border-bottom: 2px solid #ad175a;
+	color: #ad175a;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    background: white;
+    width: 90%;
+}
+
+textarea:active,
+textarea:focus,
+textarea:hover {
+	outline: none;
+	border-bottom-color: #fc894d;
+}
+
+#zonetchat {
+	width: 80vw;
+    height: 80vh;
+    background: white;
+    border-radius: 10px;
+    margin-top: 2%;
+    display: flex;
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: auto;
+    gap: 40px;
+    transition: 0.25s ease-in-out;
+	
+}
+
+#separator{
+	visibility: hidden;
+}
+
+#tchat__field {
+position: fixed;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  background: white;
+  
+  }
+
+#texte {
+	color: #ad175a;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  	margin-bottom: 10px;
+}
+
+#textetitre {
+	color: #fc894d;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    margin-top: 10px;
+	
+}
+
+.login__submit {
+	background: linear-gradient(90deg, #fc894d, #ad175a);
+  	background-clip: text;
+  	-webkit-background-clip: text;
+  	color: transparent;
+  	-webkit-text-fill-color: transparent;
+	font-size: 14px;
+	padding: 4px 5px;
+	border-radius: 26px;
+	border: 1px solid #fc894d;
+	text-transform: uppercase;
+	font-weight: 700;
+	justify-content:center;
+	width: 20%;
+	color:  #fc894d;
+	box-shadow: 0px 2px 2px #ad175a;
+	cursor: pointer;
+	transition: .2s;
+	margin-left: 2%;
+	animation: rotating-border 2s linear infinite;
+	
+	
+}
+
+
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+	border-color: #6A679E;
+	outline: none;
+}
+
+.login__submit:hover {
+  animation-play-state: paused;
+}
+
+label {
+	color: #ad175a;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+li {
+	list-style-type: none;
+}

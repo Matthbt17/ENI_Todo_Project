@@ -11,6 +11,7 @@
 		<div id="container-tache">
 			<div id="cardsContainertasks">
 				<button id="showFormBtn">+</button>
+				<button id="showAddBtn">></button>
 				<div class="cardstasks">
 					<h2 data-th-text="'Détails du projet : '+${projet.titre}"></h2>
 					<div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}" class="erreur-form-tache"></div>
@@ -54,6 +55,9 @@
 			<div class="linetasks" id="borderForm">
 				<h2 id="addTaskText">Ajouter une tâche ?</h2>
 				<div data-th-replace="~{fragments/fragment-projet-detail :: frag-projet-form('/projet/detail')}"></div>
+			</div>
+			<div class="code-projet-affichage" id="codeAffiche">
+				<h2 id="code-projet-text" data-th-text="'Le code secret de ce projet est : '+${projet.getCodeProjet}"></h2>
 			</div>
 		</div>
 		<script data-th-src="@{/css/tache.js}"></script>

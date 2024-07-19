@@ -12,4 +12,5 @@ public class BusinessCode {
 	public static final String VALIDATION_CODEPROJET_EXIST = "validation.codeprojet.exist";
 	public static final String VALIDATION_CODEPROJET_BLANK = "validation.codeprojet.blank";
 	public static final String BLL_TACHE_AJOUT_ERREUR = "bll.tache.ajout.erreur";
+	public static final String BLL_PROJET_AJOUT_ERREUR = "bll.projet.ajout.erreur";
 }

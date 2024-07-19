@@ -10,6 +10,8 @@ public interface ProjetService {
 	void updateProjet(Projet projet);
 	Projet read(String titreProjet);
 	Projet read(int id);
+	int readCode(int code);
+	Projet readParCode(int code);
 	List<Projet> findAll();
 	List<Projet> readAllProjetMember(String username);
 }

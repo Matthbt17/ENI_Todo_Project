@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: main-layout(head=~{}, titre=~{:: title}, main=~{:: main})}">
+<title>ENI PROJET</title>
+<head>
+
+</head>
+<body>
+	<main>
+		<div>
+			<form data-th-action="@{/projet/add}" method="post" id="formInsertionProjet">
+			<label for="codeDuProjet">Insérez le code secret du projet que vous souhaitez implanter :</label>
+			<input type="number" name="codeDuProjet" id="codeDuProjet" required>
+			<button type="submit">Valider</button>
+			</form>
+		</div>
+	</main>
+</body>
+</html>

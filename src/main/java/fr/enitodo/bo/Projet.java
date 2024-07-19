@@ -92,11 +92,11 @@ public class Projet implements Serializable {
 		this.tache = tache;
 	}
 
-	public long getcodeProjet() {
+	public long getCodeProjet() {
 		return codeProjet;
 	}
 
-	public void setcodeProjet(long codeProjet) {
+	public void setCodeProjet(long codeProjet) {
 		this.codeProjet = codeProjet;
 	}
 

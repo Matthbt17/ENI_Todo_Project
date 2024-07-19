@@ -1,6 +1,9 @@
 const borderForm = document.getElementById('borderForm');
 const btnExtend = document.getElementById('showFormBtn');
+const codeAffiche = document.getElementById('codeAffiche');
+const showAddBtn = document.getElementById('showAddBtn');
 let visible = false;
+let visibleForm = false;
 
 
 btnExtend.addEventListener("click", (event) => {
@@ -12,6 +15,18 @@ btnExtend.addEventListener("click", (event) => {
 		borderForm.style.visibility = 'visible';
 		borderForm.style.opacity = '100%'
 		visible = true;
+	}
+})
+
+showAddBtn.addEventListener("click", (event) => {
+	if (visibleForm) {
+		codeAffiche.style.visibility = 'hidden';
+		codeAffiche.style.opacity = '0%'
+		visibleForm = false;
+	} else {
+		codeAffiche.style.visibility = 'visible';
+		codeAffiche.style.opacity = '100%'
+		visibleForm = true;
 	}
 })
 

@@ -10,7 +10,8 @@ public interface ProjetDAO {
 	void update(Projet projet);
 	Projet read(String titreProjet);
 	Projet read(int id);
-	Projet readParCodeProjet(long codeProjet);
+	int readParCodeProjet(long codeProjet);
 	List<Projet> readAll();
 	List<Projet> findAllProjectUser(String username);
+	Projet recupParCodeProjet(int code);
 }

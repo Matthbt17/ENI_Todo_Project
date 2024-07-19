@@ -2,6 +2,7 @@ package fr.enitodo.bll;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 
@@ -24,13 +25,19 @@ public class ProjetServiceImpl implements ProjetService{
 	public void creerProjet(Projet projet) {
 		BusinessException be = new BusinessException();
 		boolean validComplet = true;
-		validComplet &= validerTitre(projet.getTitre());
-		validComplet &= verifCodeProjet(projet.getcodeProjet());
+		validComplet &= validerTitre(projet.getTitre(), be);
+		validComplet &= verifCodeProjet(projet.getCodeProjet(), be);
 		if(validComplet) {
-			projetDAO.create(projet);
+			try {
+				projetDAO.create(projet);
+			} catch(DataAccessException e) {
+				be.add(BusinessCode.BLL_PROJET_AJOUT_ERREUR);
+				throw be;
+			}
+			
+		} else {
+			throw be;
 		}
-		
-		
 	}
 
 	@Override
@@ -54,6 +61,11 @@ public class ProjetServiceImpl implements ProjetService{
 	public Projet read(int id) {
 		return projetDAO.read(id);
 	}
+	
+	@Override
+	public Projet readParCode(int code) {
+		return projetDAO.recupParCodeProjet(code);
+	}
 
 	@Override
 	public List<Projet> findAll() {
@@ -65,11 +77,13 @@ public class ProjetServiceImpl implements ProjetService{
 		return projetDAO.findAllProjectUser(username);
 	}
 	
-	/**
-	 * MÃ©thodes de validation des BO
-	 */
-	private boolean validerTitre(String titre) {
-		BusinessException be = new BusinessException();
+	@Override
+	public int readCode(int code) {
+		return projetDAO.readParCodeProjet(code);
+	}
+	
+	private boolean validerTitre(String titre, BusinessException be) {
+		 be = new BusinessException();
 		if (titre == null || titre.isBlank()) {
 			be.add(BusinessCode.VALIDATION_PROJET_TITRE_BLANK);
 			return false;
@@ -81,8 +95,7 @@ public class ProjetServiceImpl implements ProjetService{
 		return true;
 	}
 	
-	private boolean verifCodeProjet(long codeProjet) {
-		BusinessException be = new BusinessException();
+	private boolean verifCodeProjet(long codeProjet,BusinessException be) {
 		if(codeProjet == 0) {
 			be.add(BusinessCode.VALIDATION_CODEPROJET_BLANK);
 			return false;
@@ -91,11 +104,13 @@ public class ProjetServiceImpl implements ProjetService{
 			be.add(BusinessCode.VALIDATION_CODEPROJET_LENGTH);
 			return false;
 		}
-		if(projetDAO.readParCodeProjet(codeProjet) != null) {
+		if(projetDAO.readParCodeProjet(codeProjet) >= 1) {
 			be.add(BusinessCode.VALIDATION_CODEPROJET_EXIST);
 			return false;
 		}
 		return true;
 	}
+
+	
 
 }
